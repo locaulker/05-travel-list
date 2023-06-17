@@ -1,5 +1,11 @@
 import React from "react"
 
+const initialItems = [
+  { id: 1, description: "Passports", quantity: 2, packed: true },
+  { id: 2, description: "Socks", quantity: 12, packed: true },
+  { id: 3, description: "Charger", quantity: 1, packed: false }
+]
+
 export default function App() {
   return (
     <div className="app">
@@ -23,8 +29,29 @@ function Form() {
   )
 }
 
+// Making a list of Items(Components) for each array element
 function PackingList() {
-  return <div className="list">LIST</div>
+  return (
+    <div className="list">
+      <ul>
+        {initialItems.map((item) => (
+          <Item item={item} />
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+// Item component generated from each iteration of the map() function
+function Item({ item }) {
+  return (
+    <li>
+      <span style={item.packed ? { textDecoration: "line-through" } : {}}>
+        {item.quantity} {item.description}
+      </span>
+      <button>❌</button>
+    </li>
+  )
 }
 
 function Stats() {
